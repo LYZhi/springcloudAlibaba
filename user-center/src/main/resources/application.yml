@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/user_center?serverTimezone=GMT&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: LYZhi0806
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8849
+#        指定集群名称和namespace
+#        namespace: 8e0ed545-c002-4262-b6e5-9fa199db8e90
+        cluster-name: bj
+  application:
+    name: user-center
+
+server:
+  port: 8022
+

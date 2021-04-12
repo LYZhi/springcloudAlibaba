@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/content_center?serverTimezone=GMT&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: LYZhi0806
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8849
+        cluster-name: bj
+    sentinel:
+      transport:
+        dashboard: localhost:8858
+
+  application:
+    name: content-center
+
+server:
+  port: 8010
+
+user-center:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.zhi.content.config.NacosSameClusterWeightRule
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
+logging:
+  level:
+    com.zhi.content.feign.UserFeign: debug
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+  hystrix:
+    # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
+    enabled: true
+  ## 配置httpclient线程池
+  httpclient:
+    enabled: true
+    max-connections: 200
+    max-connections-per-route: 50
+  okhttp:
+    enabled: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
